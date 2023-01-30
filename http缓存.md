@@ -1,3 +1,5 @@
+> https://wenku.baidu.com/view/96d8ce09ac45b307e87101f69e3143323968f588.html
+
 ##强缓存
 浏览器请求文件时，不会从服务器请求资源，直接从本地缓存中读取，返回200 （分为memory cache,disk cache)
 
@@ -14,6 +16,7 @@
     max-age:缓存保质期。  相对时间 解决expires问题
 3.  pragma
     http1.0禁用缓存，no-cache 与cache-control  no-cache一样
+
 ###协商缓存  缓存生效返回304，重新请求返回200
 强缓存失效后，浏览器携带缓存标识向服务器发送请求，由服务器决定是否使用缓存
 1.  last-modified(服务器响应请求时，返回的该资源在服务器最后被修改的时间) response header

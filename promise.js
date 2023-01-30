@@ -16,13 +16,13 @@ class MyPromise {
         this.onResolvedCallbacks = []
         this.onRejectedCallbacks = []
 
-            //成功的回调
-            let resolve = (value) => {
+        //成功的回调
+        let resolve = (value) => {
 
             if (this.state === PENDING) {
                 // resolve 调用以后 改变成功状态
                 this.state = FULFILLED
-                //储存成功的值
+                    //储存成功的值
                 this.value = value
 
                 //一旦resolve执行，调用成功数组的函数
@@ -36,7 +36,7 @@ class MyPromise {
             if (this.state === PENDING) {
                 // resolve 调用以后 改变成功状态
                 this.state = REJECTED
-                //储存成功的值
+                    //储存成功的值
                 this.reason = reason
 
                 //一旦 reject执行，调用失败数组的函数
@@ -70,7 +70,7 @@ class MyPromise {
                 setTimeout(() => {
                     try {
                         let x = onFulfilled(this.value)
-                        //处理自己return的promise和默认的promise2的关系
+                            //处理自己return的promise和默认的promise2的关系
                         resolvePromise(promise2, x, resolve, reject)
                     } catch (e) {
                         reject(e)
@@ -84,7 +84,7 @@ class MyPromise {
                 setTimeout(() => {
                     try {
                         let x = onRejected(this.reason)
-                        //处理自己return的promise和默认的promise2的关系
+                            //处理自己return的promise和默认的promise2的关系
                         resolvePromise(promise2, x, resolve, reject)
                     } catch (e) {
                         reject(e)
@@ -102,7 +102,7 @@ class MyPromise {
                     setTimeout(() => {
                         try {
                             let x = onFulfilled(this.value)
-                            //处理自己return的promise和默认的promise2的关系
+                                //处理自己return的promise和默认的promise2的关系
                             resolvePromise(promise2, x, resolve, reject)
                         } catch (e) {
                             reject(e)
@@ -116,7 +116,7 @@ class MyPromise {
                     setTimeout(() => {
                         try {
                             let x = onRejected(this.reason)
-                            //处理自己return的promise和默认的promise2的关系
+                                //处理自己return的promise和默认的promise2的关系
                             resolvePromise(promise2, x, resolve, reject)
                         } catch (e) {
                             reject(e)
@@ -134,12 +134,9 @@ class MyPromise {
 
     }
 
-
-
     catch (fn) {
         return this.then(null, fn);
     }
-
 
 }
 
@@ -183,44 +180,45 @@ function resolvePromise(promise2, x, resolve, reject) {
 }
 
 //resolve 方法
-MyPromise.resolve = function(val){
-    if(val instanceof MyPromise){
-        return val
-    }
-    return new MyPromise((resolve,reject)=>{
-        resolve(val)
-    })
-}
-//reject 方法
-MyPromise.resolve = function(val){
-    if(val instanceof MyPromise){
-        return val
-    }
-    return new MyPromise((resolve,reject)=>{
-        reject(val)
-    })
-}
-//race方法
-MyPromise.race = function(promises){
-    return new MyPromise((resolve,reject)=>{
-        for (let index = 0; index < promises.length; index++) {
-            promises[i].then(resolve,reject)
+MyPromise.resolve = function(val) {
+        if (val instanceof MyPromise) {
+            return val
         }
-    })
-}
-//all方法
-MyPromise.all = function(promises){
-    let arr = [],i=0;
-    return new MyPromise((resolve,reject)=>{
+        return new MyPromise((resolve, reject) => {
+            resolve(val)
+        })
+    }
+    //reject 方法
+MyPromise.reject = function(val) {
+        if (val instanceof MyPromise) {
+            return val
+        }
+        return new MyPromise((resolve, reject) => {
+            reject(val)
+        })
+    }
+    //race方法
+MyPromise.race = function(promises) {
+        return new MyPromise((resolve, reject) => {
+            for (let index = 0; index < promises.length; index++) {
+                promises[i].then(resolve, reject)
+            }
+        })
+    }
+    //all方法
+MyPromise.all = function(promises) {
+    let arr = [],
+        i = 0;
+    return new MyPromise((resolve, reject) => {
         for (let index = 0; index < promises.length; index++) {
             const element = promises[index];
-            element.then(data=>{
+            element.then(data => {
                 arr[index] = data
                 i++
-                if(i===promises.length){
+                if (i === promises.length) {
                     resolve(arr)
                 }
-            },reject)
+            }, reject)
         }
     })
 }
