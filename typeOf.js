@@ -1,14 +1,12 @@
 function typeOf(val) {
-    return Object.prototype.toString().call(val).slice(8, -1).toLowerCase()
+    return Object.prototype.toString.call(val).slice(8, -1).toLowerCase()
 }
 
 function foo() {
-    console.log('===========foo=========================');
     console.log(this.name) //this.name 
 }
 
 function bar() {
-    console.log('===========bar=========================');
     var name = 'a' //私有变量
     foo()
 }
@@ -16,3 +14,7 @@ var name = 'b'
 bar()
 
 //打印值  b
+
+console.log('====================================');
+console.log(Object.prototype.toString.call({}).slice(8, -1).toLowerCase());
+console.log('====================================');
