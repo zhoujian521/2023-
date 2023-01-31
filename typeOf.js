@@ -3,10 +3,12 @@ function typeOf(val) {
 }
 
 function foo() {
+    console.log('====================================');
     console.log(this.name) //this.name 
 }
 
 function bar() {
+    console.log('====================================');
     var name = 'a' //私有变量
     foo()
 }
