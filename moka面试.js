@@ -4,17 +4,10 @@ const getType = (val) => {
 
 }
 
-function jsonStringfy() {
-    // 校验 循环引用 BigInt
-
-    // undefined function symbol
-
-    // !object
-    // object
-}
-
 
 // 2.两个大数相加
+
+
 
 const jsonstringify = (data) => {
     // 确认一个对象是否存在循环引用
