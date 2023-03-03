@@ -13,7 +13,7 @@ function debounce(fn) {
 
 
 function throttle(fn) {
-    let canRun = false
+    let canRun = true
     return function() {
         if (!canRun) return;
         setTimeout(() => {

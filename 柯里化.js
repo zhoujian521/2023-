@@ -1,42 +1,25 @@
-// function curringAdd() {
-//     let args = [].slice.call(arguments, 0);
-
-//     function add() {
-//         args = [...args, [].slice.call(arguments, 0)]
-//         return add
-//     }
-
-
-//     add.toString = function() {
-//         return args.reduce((t, a) => t + +a, 0)
-//     }
-
-//     return add;
-// }
-
 function curringAdd() {
     let args = [].slice.call(arguments, 0);
 
     function add() {
-        args = [...args, [].slice.call(arguments, 0)];
+        args = [...args, ...[].slice.call(arguments, 0)]
         return add
     }
 
     add.toString = function() {
-        return args.reduce((result, cur) => {
-            return result + +cur
-        }, 0);
+        return args.reduce((t, a) => t + +a, 0)
     }
+
     return add;
 }
 
-
-// console.log(curringAdd(1)(2)(3)); // 6
-// console.log(curringAdd(1, 2, 3)(4)); //10 
-// console.log(curringAdd(1)(2)(3)(4)(5)); // 15
-// console.log(curringAdd(2, 6)(1)); // 9
-// console.log(curringAdd(1)); // 1
-
+console.log('=============curringAdd=======================');
+console.log(curringAdd(1)(2)(3)); // 6
+console.log(curringAdd(1, 2, 3)(4)); //10 
+console.log(curringAdd(1)(2)(3)(4)(5)); // 15
+console.log(curringAdd(2, 6)(1)); // 9
+console.log(curringAdd(1)); // 1
+console.log('=============curringAdd=======================');
 
 // 部分求值
 // 不会立即求值
@@ -51,29 +34,41 @@ function curringAdd() {
 
 function curry() {
     let args = [].slice.call(arguments, 0)
-    console.log('============curry========================');
-    console.log(args);
-    console.log('============curry========================');
 
     function add() {
-        args = [...args, [].slice.call(arguments, 0)]
-        console.log('============add========================');
-        console.log(args);
-        console.log('============add========================');
+        args = [...args, ...[].slice.call(arguments, 0)]
         return add
     }
     add.toString = function() {
         return args.reduce((result, cur) => {
-            console.log('============toString========================');
-            console.log(result, +cur);
-            console.log('============toString========================');
             return result + +cur;
         }, 0)
     }
     return add
 }
 
-console.log('====================================');
-// console.log(curry(1)(2)(3)); // 6
-console.log(curry(1, 2, 3)(4)); //10 
-console.log('====================================');
+console.log('=============curry=======================');
+console.log(curry(1, 2, 3)(4)(10, 1));
+console.log('=============curry=======================');
+
+
+function curryFn() {
+    let args = [].slice.call(arguments, 0)
+
+    function add() {
+        args = [...args, ...[].slice.call(arguments, 0)]
+        return add;
+    }
+
+    add.toString = function() {
+        return args.reduce((result, cur) => {
+            return result + +cur;
+        }, 0)
+    }
+
+    return add
+}
+
+console.log('============curryFn========================');
+console.log(curryFn(1, 2, 3)(4)(10, 1));
+console.log('============curryFn========================');
