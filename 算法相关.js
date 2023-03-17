@@ -23,25 +23,23 @@
 //     return arr;
 // }
 
-// // 冒泡排序
-// function bubbSort(arr) {
-//     const len = arr.length;
-//     let swapped;
-//     for (let i = 0; i < len; i++) {
+// 冒泡排序
+// function bubbleSort(list) {
+//     console.log('===========bubbleSort=========================');
+//     let swapped = true;
+//     for (let i = 0; i < list.length; i++) {
 //         swapped = false;
-//         for (let j = i + 1; j < len; j++) {
-//             if (arr[i] > arr[j]) {
-//                 console.log('==============222======================');
-//                 let temp = arr[i];
-//                 arr[i] = arr[j];
-//                 arr[j] = temp;
+//         for (let j = 0; j < list.length - 1 - i; j++) {
+//             if (list[j] > list[j + 1]) {
+//                 let temp = list[j]
+//                 list[j] = list[j + 1];
+//                 list[j + 1] = temp
 //                 swapped = true;
 //             }
-
 //         }
-//         if (!swapped) return arr;
+//         if (!swapped) return list;
 //     }
-//     return arr
+//     return list;
 // }
 
 // console.log(selectSort(arr));

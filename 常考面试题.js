@@ -1,3 +1,4 @@
+// list ==>  tree
 // const list = [
 //     { id: 1, name: '部门 A', parentId: 0 },
 //     { id: 2, name: '部门 B', parentId: 0 },
@@ -9,73 +10,79 @@
 //     { id: 8, name: '部门 H', parentId: 4 }
 // ]
 
-
-// function convert(list) {
-//     const map = list.reduce((res, cur) => {
-//         res[cur.id] = cur
-//         return res
-//     }, {});
-
+// function convert(list, parentId) {
+//     const res = [];
+//     const map = list.reduce((res, v) => (res[v.id] = v, res), {})
+//         // const map = list.map((v) => {
+//         //     return {
+//         //         [v.id]: v
+//         //     }
+//         // })
 //     for (const item of list) {
-//         const { parentId: key = 0 } = item;
-//         if (key in map) {
-//             const parent = map[key];
+//         // 取出根节点 
+//         if (item.parentId === 0) {
+//             res.push(item)
+//             continue
+//         }
+//         // 遍历塞进去
+//         if (item.parentId in map) {
+//             const parent = map[item.parentId]
 //             parent.children = parent.children || []
 //             parent.children.push(item)
 //         }
 //     }
-//     return res;
+//     return res
 // }
 
-// console.log('===========list=========================');
+// console.log('==========convert==========================');
 // console.log(convert(list));
-// console.log('===========list=========================');
+// console.log('==========convert==========================');
 
 
 
 
 // // JS 快排   （小）中间数 （大）
 
-// const list = [1, 2, 3, 8, -4, -6, 1];
+const list = [1, 2, 3, 8, -4, -6, 5];
 
-// function quicksort(list) {
-//     // 校验 < 2 => [] [1] => 直接返回
-//     if (list.length < 2) {
-//         return list
-//     }
-//     let left = [];
-//     let right = [];
-//     const point = list[0];
-//     for (let i = 1; i < list.length; i++) {
-//         console.log('============quicksort========================');
-//         if (list[i] >= point) {
-//             right.push(list[i]);
-//         } else {
-//             left.push(list[i])
-//         }
-//     }
+function quicksort(list) {
+    // 校验 < 2 => [] [1] => 直接返回
+    if (list.length < 2) {
+        return list
+    }
+    let left = [];
+    let right = [];
+    const point = list[0];
+    for (let i = 1; i < list.length; i++) {
+        console.log('============quicksort========================');
+        if (list[i] >= point) {
+            right.push(list[i]);
+        } else {
+            left.push(list[i])
+        }
+    }
 
-//     return [...quicksort(left), point, ...quicksort(right)];
-// }
+    return [...quicksort(left), point, ...quicksort(right)];
+}
 
-// function bubbleSort(list) {
-//     let flag = 0;
-//     for (let i = 0; i < list.length; i++) {
-//         flag = 1
-//         for (let j = i + 1; j < list.length - 1; j++) {
-//             console.log('===========bubbleSort=========================');
-//             if (list[i] > list[j]) {
-//                 let temp = list[i]
-//                 list[i] = list[j];
-//                 list[j] = temp
-//                 flag = 0;
-//             }
-//         }
-//         if (flag === 1) return list;
-//     }
-//     return list
+function bubbleSort(list) {
+    console.log('===========bubbleSort=========================');
+    let swapped = true;
+    for (let i = 0; i < list.length; i++) {
+        swapped = false;
+        for (let j = 0; j < list.length - 1 - i; j++) {
+            if (list[j] > list[j + 1]) {
+                let temp = list[j]
+                list[j] = list[j + 1];
+                list[j + 1] = temp
+                swapped = true;
+            }
+        }
+        if (!swapped) return list;
+    }
+    return list;
+}
 
-// }
 
 // console.log('====================================');
 // console.log(quicksort(list));
@@ -118,12 +125,12 @@
 // console.log('====================================');
 
 
-var a = {
-    value: 0,
-    valueOf() {
-        return this.value++;
-    }
-};
-if (a == 1 && a == 2 && a == 3) {
-    console.log(1);
-}
+// var a = {
+//     value: 0,
+//     valueOf() {
+//         return this.value++;
+//     }
+// };
+// if (a == 1 && a == 2 && a == 3) {
+//     console.log(1);
+// }
