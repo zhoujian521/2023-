@@ -21,7 +21,7 @@
 // obj.a();
 // Foo.a();
 
-// // 4  2  1
+// 4  2  1
 
 
 // function changeObjProperty(o) {
@@ -58,16 +58,16 @@
 // });
 // console.log('script end');
 
-/**
- * script start
- * async1 start
- * async2
- * promise1
- * script end
- * async1 end
- * promise2
- * setTimeout
- */
+// /**
+//  * script start
+//  * async1 start
+//  * async2
+//  * promise1
+//  * script end
+//  * async1 end
+//  * promise2
+//  * setTimeout
+//  */
 
 
 // class Example extends React.Component {
@@ -82,8 +82,6 @@
 //         console.log(this.state.val); // 第 1 次 log
 //         this.setState({ val: this.state.val + 1 });
 //         console.log(this.state.val); // 第 2 次 log
-//         // 合并
-//         // 两次 setState， 获取到 this.state.val 都是 0， 所以执行时都是将 0 设置成 1， 在 react 内部会被合并掉， 只执行一次， 设置完成后 state.val 值为 1
 //         setTimeout(() => {
 //             this.setState({ val: this.state.val + 1 });
 //             console.log(this.state.val); // 第 3 次 log
@@ -96,12 +94,11 @@
 //     }
 // };
 
-/**
- * 0
- * 0
- * 2
- * 3
- * */
+// 解析：
+// 1、第一次和第二次都是在 react 自身生命周期内，触发时 isBatchingUpdates 为 true，所以并不会直接执行更新 state，而是加入了 dirtyComponents，所以打印时获取的都是更新前的状态 0。
+// 2、两次 setState 时，获取到 this.state.val 都是 0，所以执行时都是将 0 设置成 1，在 react 内部会被合并掉，只执行一次。设置完成后 state.val 值为 1。
+// 3、setTimeout 中的代码，触发时 isBatchingUpdates 为 false，所以能够直接进行更新，所以连着输出 2，3
+// https://blog.51cto.com/u_15497508/5109144
 
 
 // var b = 10;
@@ -110,6 +107,8 @@
 //     b = 20; // 非匿名函数中 函数变量为只读状态 无法修改
 //     console.log(b);
 // })();
+// 函数声明  > 变量声明
+// 非匿名函数中 函数变量为只读状态 无法修改
 
 
 // var a = 10;
@@ -127,29 +126,28 @@
  * 20
  */
 
-
 // var obj = {
 //     '2': 3,
 //     '3': 4,
-//     'length': 2, // 将根据 length 将元素填充到对应位置并修改 length 属性 +1， 
+//     'length': 2,
 //     'splice': Array.prototype.splice,
 //     'push': Array.prototype.push
 // }
-
 // console.log('====================================');
-// console.log(obj[3]);
+// console.log(obj[2]);
 // console.log('====================================');
+// // 将根据 length 将元素填充到对应位置并修改 length 属性 +1，
+// obj.push(1);
+// obj.push(2);
 
-// obj.push(1)
-// obj.push(2)
-
-// console.log(obj)
+// console.log(obj);
 // console.log(JSON.stringify(obj))
 
 
 // var a = { n: 1 }; //  { n: 1 }
 // var b = a; //  { n: 1 };
-// a.x = a = { n: 2 }; // .的优先级 高于 赋值
+// a.x = a = { n: 2 };
+// // .的优先级 高于 赋值
 // // b { n: 1, x: { n: 2 } } 
 // // a { n: 2 }
 // console.log(a.x) // undefine
@@ -164,6 +162,7 @@
 // a[c] = 'c'; // { 123: 'c' }
 // console.log(a[b]); // c
 
+
 // // example 2
 // var a = {},
 //     b = Symbol('123'),
@@ -171,6 +170,7 @@
 // a[b] = 'b';
 // a[c] = 'c';
 // console.log(a[b]); // b
+
 // // example 3
 // var a = {},
 //     b = { key: '123' },
