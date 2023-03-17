@@ -41,59 +41,54 @@
 
 
 
-// // JS 快排   （小）中间数 （大）
+// JS 快排   （小）中间数 （大）
+// const list = [1, 1, 2, 3, 8, -4, -6, 5];
 
-const list = [1, 2, 3, 8, -4, -6, 5];
+// function quicksort(list) {
+//     console.log('============quicksort========================');
+//     // 校验 < 2 => [] [1] => 直接返回
+//     if (list.length < 2) return list
+//     let left = [];
+//     let right = [];
+//     const point = list[0];
+//     for (let i = 1; i < list.length; i++) {
 
-function quicksort(list) {
-    // 校验 < 2 => [] [1] => 直接返回
-    if (list.length < 2) {
-        return list
-    }
-    let left = [];
-    let right = [];
-    const point = list[0];
-    for (let i = 1; i < list.length; i++) {
-        console.log('============quicksort========================');
-        if (list[i] >= point) {
-            right.push(list[i]);
-        } else {
-            left.push(list[i])
-        }
-    }
+//         if (list[i] >= point) {
+//             right.push(list[i]);
+//         } else {
+//             left.push(list[i])
+//         }
+//     }
+//     return [...quicksort(left), point, ...quicksort(right)];
+// }
 
-    return [...quicksort(left), point, ...quicksort(right)];
-}
-
-function bubbleSort(list) {
-    console.log('===========bubbleSort=========================');
-    let swapped = true;
-    for (let i = 0; i < list.length; i++) {
-        swapped = false;
-        for (let j = 0; j < list.length - 1 - i; j++) {
-            if (list[j] > list[j + 1]) {
-                let temp = list[j]
-                list[j] = list[j + 1];
-                list[j + 1] = temp
-                swapped = true;
-            }
-        }
-        if (!swapped) return list;
-    }
-    return list;
-}
-
-
+// function bubbleSort(list) {
+//     console.log('===========bubbleSort=========================');
+//     let swapped = true;
+//     for (let i = 0; i < list.length; i++) {
+//         swapped = false;
+//         for (let j = 0; j < list.length - 1 - i; j++) {
+//             if (list[j] > list[j + 1]) {
+//                 let temp = list[j]
+//                 list[j] = list[j + 1];
+//                 list[j + 1] = temp
+//                 swapped = true;
+//             }
+//         }
+//         if (!swapped) return list;
+//     }
+//     return list;
+// }
 // console.log('====================================');
 // console.log(quicksort(list));
 // console.log(bubbleSort(list));
 // console.log('====================================');
 
 
+// // 字符串 转 map
 // const str = 'abbaddab';
 
-
-// function getMap(str) {
+// function getMapStr(str) {
 //     let map = {};
 //     let newStr = '';
 //     for (let i = 0; i < str.length; i++) {
@@ -104,32 +99,25 @@ function bubbleSort(list) {
 //             map[key] = map[key] + 1
 //         }
 //     }
-
-//     let count = 0;
 //     for (const key in map) {
-//         newStr += `${key}:${map[key]}`
-//         if (count < Object.keys(map).length - 1) {
-//             newStr += ","
-//         }
-//         count++;
+//         newStr += `${key}:${map[key]},`;
 //     }
-
-
-//     console.log('====================================');
-//     console.log(newStr);
-//     console.log('====================================');
+//     return newStr.slice(0, newStr.length - 1);;
 // }
 
 // console.log('====================================');
-// console.log(getMap(str));
+// console.log(getMapStr(str));
 // console.log('====================================');
 
 
 // var a = {
-//     value: 0,
+//     value: 1,
 //     valueOf() {
 //         return this.value++;
-//     }
+//     },
+//     // toString() {
+//     //     return this.value++;
+//     // }
 // };
 // if (a == 1 && a == 2 && a == 3) {
 //     console.log(1);
